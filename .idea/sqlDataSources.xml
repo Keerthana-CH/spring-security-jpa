@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="5f23e6da-ede6-43ef-9e60-e6df0307d0bd" name="@localhost Mapping">
+      <data-sources db="1c2725a5-4f60-4dac-9c1f-e0037b0f4382" ddl="280f870c-036c-4781-84be-815dc8f11963" />
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="280f870c-036c-4781-84be-815dc8f11963" />
+          <option name="name" value="ss_jpa_db@localhost (DDL)" />
+          <option name="dbmsName" value="MYSQL" />
+          <option name="parent" value="1c2725a5-4f60-4dac-9c1f-e0037b0f4382" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/spring-security-jpa/src/main/resources/templates/data.sql" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

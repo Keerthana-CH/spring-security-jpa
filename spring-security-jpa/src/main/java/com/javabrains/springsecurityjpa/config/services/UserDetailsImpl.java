@@ -1,5 +1,6 @@
 package com.javabrains.springsecurityjpa.config.services;
 
+import com.javabrains.springsecurityjpa.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,31 +9,44 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    private String username;
+    private String userName;
+    private String password;
+    private boolean active;
+    private List<GrantedAuthority> authorities;
 
-    public UserDetailsImpl(String username) {
-        this.username=username;
+    public UserDetailsImpl(User user) {
+
+        this.userName = user.getUserName();
+        this.password = passwordEncoder().encode(user.getPassword());
+        this.active = user.isActive();
+        this.authorities = Arrays.stream(user.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList())
+                ;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return passwordEncoder().encode("pass");
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     @Override
@@ -52,6 +66,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return active;
     }
 }
